@@ -55,32 +55,33 @@ def runSimulation(cacheline_size, l2_assoc,l1i_assoc, l1d_assoc, l2_size, l1i_si
     rutaLocal = "/home/brayan/Documents/Proyecto3/blackscholes"
     ruta = " " + rutaLocal+"/src/blackscholes -o "+rutaLocal+"/inputs/input_test/in_4.txt "
     lineaMakeFile = 60
-    compileCmd = "CXX"
-    compileC = "++"
+    command = "CXX"
+    compiler = "++"
     if benchmark != "blackscholes":
-        rutaLocal = "/home/brayan/Documents/Proyecto3/fluidanimate"
-        ruta = " " + rutaLocal+"/src/fluidanimate -o " + rutaLocal+"/inputs/input_test/in_5K.fluid"
-        lineaMakeFile = 4
-        compileCmd = "CC"
-        compileC = "cc"
+        rutaLocal = "/home/brayan/Documents/Proyecto3/458.sjeng"
+        ruta = " " + rutaLocal+"/src/benchmark -o " + rutaLocal+"/data/test.txt"
+        lineaMakeFile = 5
+        command = "CC"
+        compiler = "cc"
 
     with open(rutaLocal+'/src/Makefile', 'r') as file:
         data = file.readlines()
     if isa == "ARM":
-        data[lineaMakeFile] = compileCmd+" = arm-linux-gnueabi-g"+compileC+" -static\n"
+        data[lineaMakeFile] = command + " = arm-linux-gnueabi-g" +compiler + " -static\n"
     else:
-        data[lineaMakeFile] = compileCmd+" = riscv32-unknown-elf-g"+compileC+"\n"    
+        data[lineaMakeFile] = command + " = riscv32-unknown-elf-g"+compiler+"\n"    
     with open(rutaLocal+'/src/Makefile', 'w') as file:
         file.writelines( data )
 
-    command  = "cd " + rutaLocal + "/src && make"
+    command  = "cd " + rutaLocal + "/src && export RISCV=/home/brayan/Documents/isa/riscv && export PATH=$PATH:$RISCV/bin && make"
     out = subprocess.run(command, shell=True)
     print(out)
     lineaMakeFile = 60
 
 
-    command  = "time ~/Documents/GEM5/gem5/build/"+isa+"-"+branchpredictor+"/gem5.opt -d "+rutaLocal+"/m5out/ ~/Documents/GEM5/gem5/configs/example/se.py  -c "+ ruta +" --caches --l2cache  --cpu-type="+cpu+"  --l1d_size="+l1d_size+" --l1i_size="+l1i_size+" --l2_size="+l2_size+" --l1d_assoc="+l1d_assoc+" --l1i_assoc="+l1i_assoc+" --l2_assoc="+l2_assoc+" --cacheline_size="+cacheline_size
-    out = subprocess.run(command, shell=True)
+    command  = "time ~/Documents/GEM5/gem5/build/"+isa+"-"+branchpredictor+"/gem5.opt -d "+rutaLocal+"/m5out/ ~/Documents/GEM5/gem5/configs/example/se.py  -c "+ ruta +" --caches --l2cache  --cpu-type="+cpu+"  --l1d_size="+l1d_size+" --l1i_size="+l1i_size+" --l2_size="+l2_size+" --l1d_assoc="+l1d_assoc+" --l1i_assoc="+l1i_assoc+" --l2_assoc="+l2_assoc+" --cacheline_size="+cacheline_size +" -m 100000000"
+    process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out, err = process.communicate()
     print(out)
         
 def iterate(cpu, isa, benchmark, variable = "", variableLabel="", cacheline_size = ["64"], l1d_size = ["32kB"]):
@@ -132,9 +133,9 @@ def iterate(cpu, isa, benchmark, variable = "", variableLabel="", cacheline_size
 
 
 
-iterate("TimingSimpleCPU", "ARM", "adfasd", variable = "l1d_size", 
+iterate("TimingSimpleCPU", "RISCV", "blackscholes", variable = "l1d_size", 
          variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 
-         l1d_size = ["128kB", "16kB", "32kB", "64kB", "128kB"])
+         l1d_size = ["128kB"])
 
 # iterate("TimingSimpleCPU", "ARM", variable = "l1d_size", 
 #         variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 

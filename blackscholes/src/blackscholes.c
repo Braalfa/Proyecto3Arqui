@@ -297,6 +297,7 @@ int main (int argc, char **argv)
       exit(1);
     }
     rv = fscanf(file, "%i", &numOptions);
+    numOptions = 1;
     if(rv != 1) {
       printf("ERROR: Unable to read from file `%s'.\n", inputFile);
       fclose(file);

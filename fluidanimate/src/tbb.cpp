@@ -199,12 +199,8 @@ void InitSim(char const *fileName, unsigned int threadnum)
 	fp = fopen(fileName,"rb");
 	assert(fp);
 	
-	fread((void *)&restParticlesPerMeter, sizeof(float), 1, fp);
-	fread((void *)&origNumParticles, sizeof(int), 1, fp);
-	if(!isLittleEndian()) {
-          restParticlesPerMeter = bswap_float(restParticlesPerMeter);
-          origNumParticles      = bswap_int32(origNumParticles);
-	}
+	restParticlesPerMeter = 10;
+    origNumParticles      = 10;
 	numParticles = origNumParticles;
 
 	h = kernelRadiusMultiplier / restParticlesPerMeter;
@@ -1488,14 +1484,14 @@ int main(int argc, char *argv[])
 	__parsec_bench_begin(__parsec_fluidanimate);
 #endif
 
-	if(argc < 4 || argc >= 6)
-	{
-		std::cout << "Usage: " << argv[0] << " <threadnum> <framenum> <.fluid input file> [.fluid output file]" << std::endl;
-		return -1;
-	}
+	// if(argc < 4 || argc >= 6)
+	// {
+	// 	std::cout << "Usage: " << argv[0] << " <threadnum> <framenum> <.fluid input file> [.fluid output file]" << std::endl;
+	// 	return -1;
+	// }
 
-	int threadnum = atoi(argv[1]);
-	int framenum = atoi(argv[2]);
+	int threadnum = 1;
+	int framenum = 1;
 
 	//Check arguments
 	if(threadnum < 1) {
@@ -1512,7 +1508,7 @@ int main(int argc, char *argv[])
 	tbb::task_scheduler_init init(threadnum);
 #endif
 
-	InitSim(argv[3], threadnum);
+	InitSim(argv[1], threadnum);
 
 #ifdef ENABLE_PARSEC_HOOKS
 	__parsec_roi_begin();

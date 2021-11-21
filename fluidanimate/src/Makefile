@@ -1,8 +1,7 @@
 TARGET  = fluidanimate
 SRC     = serial.cpp 
 CSRC    = $(SRC)
-CXX = arm-linux-gnueabi-g++ -static
-CC = arm-linux-gnueabi-gcc -static
+CXX = mipsel-linux-gnu-g++ -static
 
 serial: $(CSRC)
 	$(CXX) $(CXXFLAGS) $(CSRC) $(LDFLAGS) $(LIBS) -o $(TARGET)

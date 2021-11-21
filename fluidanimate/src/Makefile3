@@ -3,7 +3,7 @@ SRC     = tbb.cpp
 CSRC    = $(SRC)
 CXXFLAGS += -DTBB_VERSION
 LIBS	+= -ltbb
-
+CXX = riscv32-unknown-elf-g++
 all:	tbb cmp
 
 tbb: $(CSRC)
