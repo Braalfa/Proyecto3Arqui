@@ -4,7 +4,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 
-rutaLocal = "/home/brayan/Documents/GEM5/gem5/parsec-2.1/pkgs/apps/blackscholes"
+localDirectory = '/home/brayan/Documents'
+rutaLocal = localDirectory+"/GEM5/gem5/parsec-2.1/pkgs/apps/blackscholes"
 
 def grepToNumber(grep):
     i = grep.find('                       #')-1
@@ -52,13 +53,13 @@ def generateImages(df, xcolumns, xlabes, ycolumns, ylabes, folder):
 
 def runSimulation(cacheline_size, l2_assoc,l1i_assoc, l1d_assoc, l2_size, l1i_size, l1d_size, cpu, isa, branchpredictor, benchmark):
     global rutaLocal
-    rutaLocal = "/home/brayan/Documents/Proyecto3/blackscholes"
+    rutaLocal = localDirectory+"/Proyecto3/blackscholes"
     ruta = " " + rutaLocal+"/src/blackscholes -o "+rutaLocal+"/inputs/input_test/in_4.txt "
     lineaMakeFile = 60
     command = "CXX"
     compiler = "++"
     if benchmark != "blackscholes":
-        rutaLocal = "/home/brayan/Documents/Proyecto3/458.sjeng"
+        rutaLocal = localDirectory+"/Proyecto3/458.sjeng"
         ruta = " " + rutaLocal+"/src/benchmark -o " + rutaLocal+"/data/test.txt"
         lineaMakeFile = 5
         command = "CC"
@@ -73,13 +74,13 @@ def runSimulation(cacheline_size, l2_assoc,l1i_assoc, l1d_assoc, l2_size, l1i_si
     with open(rutaLocal+'/src/Makefile', 'w') as file:
         file.writelines( data )
 
-    command  = "cd " + rutaLocal + "/src && export RISCV=/home/brayan/Documents/isa/riscv && export PATH=$PATH:$RISCV/bin && make"
+    command  = "cd " + rutaLocal + "/src && export RISCV="+localDirectory+"/isa/riscv && export PATH=$PATH:$RISCV/bin && make"
     out = subprocess.run(command, shell=True)
     print(out)
     lineaMakeFile = 60
 
 
-    command  = "time ~/Documents/GEM5/gem5/build/"+isa+"-"+branchpredictor+"/gem5.opt -d "+rutaLocal+"/m5out/ ~/Documents/GEM5/gem5/configs/example/se.py  -c "+ ruta +" --caches --l2cache  --cpu-type="+cpu+"  --l1d_size="+l1d_size+" --l1i_size="+l1i_size+" --l2_size="+l2_size+" --l1d_assoc="+l1d_assoc+" --l1i_assoc="+l1i_assoc+" --l2_assoc="+l2_assoc+" --cacheline_size="+cacheline_size +" -m 100000000"
+    command  = "time "+localDirectory+"/GEM5/gem5/build/"+isa+"-"+branchpredictor+"/gem5.opt -d "+rutaLocal+"/m5out/ "+localDirectory+"/GEM5/gem5/configs/example/se.py  -c "+ ruta +" --caches --l2cache  --cpu-type="+cpu+"  --l1d_size="+l1d_size+" --l1i_size="+l1i_size+" --l2_size="+l2_size+" --l1d_assoc="+l1d_assoc+" --l1i_assoc="+l1i_assoc+" --l2_assoc="+l2_assoc+" --cacheline_size="+cacheline_size +" -I 1000000"
     process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = process.communicate()
     print(out)
@@ -132,10 +133,21 @@ def iterate(cpu, isa, benchmark, variable = "", variableLabel="", cacheline_size
     generateImages(df, xcolumns, xlabes, ycolumns, ylabes, folder)
 
 
+# ARM - TimingSimpleCPU - blackscholes - l1d_size
+# iterate("TimingSimpleCPU", "ARM", "blackscholes", variable = "l1d_size", 
+#          variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 
+#          l1d_size = ["8kB", "16kB", "32kB", "64kB", "128kB"])
 
-iterate("TimingSimpleCPU", "RISCV", "blackscholes", variable = "l1d_size", 
-         variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 
-         l1d_size = ["128kB"])
+## ARM - TimingSimpleCPU - blackscholes - cacheline_size
+# iterate("TimingSimpleCPU", "ARM", "blackscholes", variable = "cacheline_size", 
+#          variableLabel="Tamano de linea", cacheline_size = [str(2**x) for x in range(3,8)], 
+#          l1d_size = ["128kB"])
+
+# ARM - TimingSimpleCPU - 458.sjeng - l1d_size
+iterate("TimingSimpleCPU", "RISCV", "458.sjeng", variable = "l1d_size", 
+          variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 
+          l1d_size = ["128kB"])
+
 
 # iterate("TimingSimpleCPU", "ARM", variable = "l1d_size", 
 #         variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 
@@ -154,48 +166,49 @@ isas = ["ARM", "RISCV"]
 cpus = ["AtomicSimpleCPU", "TimingSimpleCPU"]
 branchpredictors = ["TournamentBP", "BiModeBP", "LocalBP"]
 
-# for cpu in cpus:
-#     for isa in isas:
-        ############------------------------------###################
-        # Branch Predictors
-        # cacheline_size = "64"
-        # l2_assoc = "1"
-        # l1i_assoc = "1"
-        # l1d_assoc = "2"
-        # l2_size = "1MB"
-        # l1i_size = "128kB"
-        # l1d_size = "32kB"
+# for benchmark in ['blackscholes', 'dsafdsa']:
+#     for cpu in cpus:
+#         for isa in isas:
+#             ###########------------------------------###################
+#             #Branch Predictors
+#             cacheline_size = "64"
+#             l2_assoc = "1"
+#             l1i_assoc = "1"
+#             l1d_assoc = "2"
+#             l2_size = "1MB"
+#             l1i_size = "128kB"
+#             l1d_size = "32kB"
 
-        # data = {"cacheline_size":[], "l1d_size":[], "cpu":[], "isa": [], "branchp": [], 
-        # "benchmark":[],"BTBMissPct":[],"BTBHitRatio":[],"numCycles":[],
-        #  "branchMispredRatio":[]}
+#             data = {"cacheline_size":[], "l1d_size":[], "cpu":[], "isa": [], "branchp": [], 
+#             "benchmark":[],"BTBMissPct":[],"BTBHitRatio":[],"numCycles":[],
+#             "branchMispredRatio":[]}
 
-        # for branchpredictor_aux in branchpredictors:
-        #     runSimulation(cacheline_size, l2_assoc,l1i_assoc, l1d_assoc, l2_size, l1i_size, l1d_size, cpu, isa, branchpredictor_aux, benchmark)
-        #     data["cacheline_size"].append(cacheline_size)
-        #     data["l1d_size"].append(l1d_size)
-        #     data["cpu"].append(cpu)
-        #     data["isa"].append(isa)
-        #     data["branchp"].append(branchpredictor_aux)
-        #     data["benchmark"].append(benchmark)
-        #     data["BTBMissPct"].append(obtain("system.cpu.branchPred.BTBMissPct"))
-        #     data["BTBHitRatio"].append(obtain("system.cpu.branchPred.BTBHitRatio"))
-        #     data["branchMispredRatio"].append(obtain("branchMispredRatio"))
-        #     data["numCycles"].append(obtain("system.cpu.numCycles"))
-        
-        # df = pd.DataFrame(data)
-        # xcolumns = ["branchp"]
-        # xlabes = ["Branch Predictor"]
+#             for branchpredictor_aux in branchpredictors:
+#                 runSimulation(cacheline_size, l2_assoc,l1i_assoc, l1d_assoc, l2_size, l1i_size, l1d_size, cpu, isa, branchpredictor_aux, benchmark)
+#                 data["cacheline_size"].append(cacheline_size)
+#                 data["l1d_size"].append(l1d_size)
+#                 data["cpu"].append(cpu)
+#                 data["isa"].append(isa)
+#                 data["branchp"].append(branchpredictor_aux)
+#                 data["benchmark"].append(benchmark)
+#                 data["BTBMissPct"].append(obtain("system.cpu.branchPred.BTBMissPct"))
+#                 data["BTBHitRatio"].append(obtain("system.cpu.branchPred.BTBHitRatio"))
+#                 data["branchMispredRatio"].append(obtain("branchMispredRatio"))
+#                 data["numCycles"].append(obtain("system.cpu.numCycles"))
+            
+#             df = pd.DataFrame(data)
+#             xcolumns = ["branchp"]
+#             xlabes = ["Branch Predictor"]
 
-        # ycolumns = ["numCycles","BTBMissPct","BTBHitRatio","branchMispredRatio"]
-        # ylabes = ["Numero de Ciclos", "Porcentaje de Misses BTB", "Porcentaje de Hits BTB","Hits l1d","Razon de fallo de Prediccion"]
+#             ycolumns = ["numCycles","BTBMissPct","BTBHitRatio","branchMispredRatio"]
+#             ylabes = ["Numero de Ciclos", "Porcentaje de Misses BTB", "Porcentaje de Hits BTB","Hits l1d","Razon de fallo de Prediccion"]
 
-        # folder = isa+"-"+cpu+"-branchpredictors"
+#             folder = isa+"-"+cpu+"-branchpredictors"
 
-        # command  = "mkdir " + folder
-        # out = subprocess.run(command, shell=True)
-        # print(out)
+#             command  = "mkdir " + folder
+#             out = subprocess.run(command, shell=True)
+#             print(out)
 
 
-        # df.to_csv(folder+"/data.csv")
-        # generateDiscrete(df, xcolumns, xlabes, ycolumns, ylabes, folder)
+#             df.to_csv(folder+"/data.csv")
+#             generateDiscrete(df, xcolumns, xlabes, ycolumns, ylabes, folder)

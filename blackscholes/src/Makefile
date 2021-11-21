@@ -58,7 +58,7 @@ NCO = -DNCO=2
 endif
 
 CXXFLAGS += $(MT) $(SZ) $(NCO) $(FUNC) $(ERR) $(CSRC)
-CXX = riscv32-unknown-elf-g++
+CXX = arm-linux-gnueabi-g++ -static
 all: $(TARGET)
 
 $(TARGET): clean $(CSRC)
