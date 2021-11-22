@@ -1,4 +1,4 @@
 ,cacheline_size,l1d_size,cpu,isa,branchp,benchmark,BTBMissPct,BTBHitRatio,numCycles,branchMispredRatio
-0,64,32kB,AtomicSimpleCPU,ARM,TournamentBP,blackscholes,0.010286,0.989714,2764097.0,0.024011
-1,64,32kB,AtomicSimpleCPU,ARM,BiModeBP,blackscholes,0.008754,0.991246,2764097.0,0.040539
-2,64,32kB,AtomicSimpleCPU,ARM,LocalBP,blackscholes,0.018893,0.981107,2764097.0,0.112212
+0,64,32kB,AtomicSimpleCPU,ARM,TournamentBP,blackscholes,0.021469,0.978531,2764097.0,0.035578
+1,64,32kB,AtomicSimpleCPU,ARM,BiModeBP,blackscholes,0.01993,0.98007,2764097.0,0.050875
+2,64,32kB,AtomicSimpleCPU,ARM,LocalBP,blackscholes,0.02745,0.97255,2764097.0,0.1154

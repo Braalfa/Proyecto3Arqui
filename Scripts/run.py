@@ -133,91 +133,91 @@ def iterate(cpu, isa, benchmark, flops, variable = "", variableLabel="", cacheli
     generateImages(df, xcolumns, xlabes, ycolumns, ylabes, folder)
 
 
-# RISCV - TimingSimpleCPU - blackscholes - l1d_size
-iterate("TimingSimpleCPU", "RISCV", "blackscholes", "10000000", variable = "l1d_size", 
-         variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 
-         l1d_size = [str(2**x)+"B" for x in range(7,14)])
+# # RISCV - TimingSimpleCPU - blackscholes - l1d_size
+# iterate("TimingSimpleCPU", "RISCV", "blackscholes", "10000000", variable = "l1d_size", 
+#          variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 
+#          l1d_size = [str(2**x)+"B" for x in range(7,14)])
 
-# RISCV - TimingSimpleCPU - 458.sjeng - l1d_size
-iterate("TimingSimpleCPU", "RISCV", "458.sjeng", "10000000", variable = "l1d_size", 
-          variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 
-          l1d_size = [str(2**x)+"B" for x in range(7,14)])
+# # RISCV - TimingSimpleCPU - 458.sjeng - l1d_size
+# iterate("TimingSimpleCPU", "RISCV", "458.sjeng", "10000000", variable = "l1d_size", 
+#           variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 
+#           l1d_size = [str(2**x)+"B" for x in range(7,14)])
 
-# RISCV - TimingSimpleCPU - blackscholes - cacheline_size *Nota: en 11 se cae
-iterate("TimingSimpleCPU", "RISCV", "blackscholes", "10000000", variable = "cacheline_size", 
-          variableLabel="Tamano de linea", cacheline_size = [str(2**x) for x in range(4,10)], 
-          l1d_size = ["128kB"])
+# # RISCV - TimingSimpleCPU - blackscholes - cacheline_size *Nota: en 11 se cae
+# iterate("TimingSimpleCPU", "RISCV", "blackscholes", "10000000", variable = "cacheline_size", 
+#           variableLabel="Tamano de linea", cacheline_size = [str(2**x) for x in range(4,10)], 
+#           l1d_size = ["128kB"])
 
-# RISCV - TimingSimpleCPU - 458.sjeng - cacheline_size
-iterate("TimingSimpleCPU", "RISCV", "458.sjeng", "10000000", variable = "cacheline_size", 
-           variableLabel="Tamano de linea", cacheline_size = [str(2**x) for x in range(4,10)], 
-           l1d_size = ["128kB"])
-
-
-
-
-# RISCV - AtomicSimpleCPU - blackscholes - l1d_size
-iterate("AtomicSimpleCPU", "RISCV", "blackscholes", "10000000", variable = "l1d_size", 
-         variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 
-         l1d_size = [str(2**x)+"B" for x in range(7,14)])
-
-# RISCV - AtomicSimpleCPU - 458.sjeng - l1d_size
-iterate("AtomicSimpleCPU", "RISCV", "458.sjeng", "10000000", variable = "l1d_size", 
-          variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 
-          l1d_size = [str(2**x)+"B" for x in range(7,14)])
-
-# RISCV - AtomicSimpleCPU - blackscholes - cacheline_size *Nota: en 11 se cae
-iterate("AtomicSimpleCPU", "RISCV", "blackscholes", "10000000", variable = "cacheline_size", 
-          variableLabel="Tamano de linea", cacheline_size = [str(2**x) for x in range(4,10)], 
-          l1d_size = ["128kB"])
-
-# RISCV - AtomicSimpleCPU - 458.sjeng - cacheline_size
-iterate("AtomicSimpleCPU", "RISCV", "458.sjeng", "10000000", variable = "cacheline_size", 
-           variableLabel="Tamano de linea", cacheline_size = [str(2**x) for x in range(4,10)], 
-           l1d_size = ["128kB"])
+# # RISCV - TimingSimpleCPU - 458.sjeng - cacheline_size
+# iterate("TimingSimpleCPU", "RISCV", "458.sjeng", "10000000", variable = "cacheline_size", 
+#            variableLabel="Tamano de linea", cacheline_size = [str(2**x) for x in range(4,10)], 
+#            l1d_size = ["128kB"])
 
 
 
-# ARM - TimingSimpleCPU - blackscholes - l1d_size
-iterate("TimingSimpleCPU", "ARM", "blackscholes", "100000000000", variable = "l1d_size", 
-         variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 
-         l1d_size = [str(2**x)+"B" for x in range(7,14)])
 
-# ARM - TimingSimpleCPU - 458.sjeng - l1d_size
-iterate("TimingSimpleCPU", "ARM", "458.sjeng", "10000000", variable = "l1d_size", 
-          variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 
-          l1d_size = [str(2**x)+"B" for x in range(7,14)])
+# # RISCV - AtomicSimpleCPU - blackscholes - l1d_size
+# iterate("AtomicSimpleCPU", "RISCV", "blackscholes", "10000000", variable = "l1d_size", 
+#          variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 
+#          l1d_size = [str(2**x)+"B" for x in range(7,14)])
 
-# ARM - TimingSimpleCPU - blackscholes - cacheline_size *Nota: en 11 se cae
-iterate("TimingSimpleCPU", "ARM", "blackscholes", "100000000000", variable = "cacheline_size", 
-          variableLabel="Tamano de linea", cacheline_size = [str(2**x) for x in range(4,10)], 
-          l1d_size = ["128kB"])
+# # RISCV - AtomicSimpleCPU - 458.sjeng - l1d_size
+# iterate("AtomicSimpleCPU", "RISCV", "458.sjeng", "10000000", variable = "l1d_size", 
+#           variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 
+#           l1d_size = [str(2**x)+"B" for x in range(7,14)])
 
-# ARM - TimingSimpleCPU - 458.sjeng - cacheline_size
-iterate("TimingSimpleCPU", "ARM", "458.sjeng", "10000000", variable = "cacheline_size", 
-           variableLabel="Tamano de linea", cacheline_size = [str(2**x) for x in range(4,10)], 
-           l1d_size = ["128kB"])
+# # RISCV - AtomicSimpleCPU - blackscholes - cacheline_size *Nota: en 11 se cae
+# iterate("AtomicSimpleCPU", "RISCV", "blackscholes", "10000000", variable = "cacheline_size", 
+#           variableLabel="Tamano de linea", cacheline_size = [str(2**x) for x in range(4,10)], 
+#           l1d_size = ["128kB"])
+
+# # RISCV - AtomicSimpleCPU - 458.sjeng - cacheline_size
+# iterate("AtomicSimpleCPU", "RISCV", "458.sjeng", "10000000", variable = "cacheline_size", 
+#            variableLabel="Tamano de linea", cacheline_size = [str(2**x) for x in range(4,10)], 
+#            l1d_size = ["128kB"])
 
 
-# ARM - AtomicSimpleCPU - blackscholes - l1d_size
-iterate("AtomicSimpleCPU", "ARM", "blackscholes", "10000000", variable = "l1d_size", 
-         variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 
-         l1d_size = [str(2**x)+"B" for x in range(7,14)])
 
-# ARM - AtomicSimpleCPU - 458.sjeng - l1d_size
-iterate("AtomicSimpleCPU", "ARM", "458.sjeng", "10000000", variable = "l1d_size", 
-          variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 
-          l1d_size = [str(2**x)+"B" for x in range(7,14)])
+# # ARM - TimingSimpleCPU - blackscholes - l1d_size
+# iterate("TimingSimpleCPU", "ARM", "blackscholes", "100000000000", variable = "l1d_size", 
+#          variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 
+#          l1d_size = [str(2**x)+"B" for x in range(7,14)])
 
-# ARM - AtomicSimpleCPU - blackscholes - cacheline_size *Nota: en 11 se cae
-iterate("AtomicSimpleCPU", "ARM", "blackscholes", "10000000", variable = "cacheline_size", 
-          variableLabel="Tamano de linea", cacheline_size = [str(2**x) for x in range(4,10)], 
-          l1d_size = ["128kB"])
+# # ARM - TimingSimpleCPU - 458.sjeng - l1d_size
+# iterate("TimingSimpleCPU", "ARM", "458.sjeng", "10000000", variable = "l1d_size", 
+#           variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 
+#           l1d_size = [str(2**x)+"B" for x in range(7,14)])
 
-# ARM - AtomicSimpleCPU - 458.sjeng - cacheline_size
-iterate("AtomicSimpleCPU", "ARM", "458.sjeng", "10000000", variable = "cacheline_size", 
-           variableLabel="Tamano de linea", cacheline_size = [str(2**x) for x in range(4,10)], 
-           l1d_size = ["128kB"])
+# # ARM - TimingSimpleCPU - blackscholes - cacheline_size *Nota: en 11 se cae
+# iterate("TimingSimpleCPU", "ARM", "blackscholes", "100000000000", variable = "cacheline_size", 
+#           variableLabel="Tamano de linea", cacheline_size = [str(2**x) for x in range(4,10)], 
+#           l1d_size = ["128kB"])
+
+# # ARM - TimingSimpleCPU - 458.sjeng - cacheline_size
+# iterate("TimingSimpleCPU", "ARM", "458.sjeng", "10000000", variable = "cacheline_size", 
+#            variableLabel="Tamano de linea", cacheline_size = [str(2**x) for x in range(4,10)], 
+#            l1d_size = ["128kB"])
+
+
+# # ARM - AtomicSimpleCPU - blackscholes - l1d_size
+# iterate("AtomicSimpleCPU", "ARM", "blackscholes", "10000000", variable = "l1d_size", 
+#          variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 
+#          l1d_size = [str(2**x)+"B" for x in range(7,14)])
+
+# # ARM - AtomicSimpleCPU - 458.sjeng - l1d_size
+# iterate("AtomicSimpleCPU", "ARM", "458.sjeng", "10000000", variable = "l1d_size", 
+#           variableLabel="Tamano de la cache l1d", cacheline_size = ["64"], 
+#           l1d_size = [str(2**x)+"B" for x in range(7,14)])
+
+# # ARM - AtomicSimpleCPU - blackscholes - cacheline_size *Nota: en 11 se cae
+# iterate("AtomicSimpleCPU", "ARM", "blackscholes", "10000000", variable = "cacheline_size", 
+#           variableLabel="Tamano de linea", cacheline_size = [str(2**x) for x in range(4,10)], 
+#           l1d_size = ["128kB"])
+
+# # ARM - AtomicSimpleCPU - 458.sjeng - cacheline_size
+# iterate("AtomicSimpleCPU", "ARM", "458.sjeng", "10000000", variable = "cacheline_size", 
+#            variableLabel="Tamano de linea", cacheline_size = [str(2**x) for x in range(4,10)], 
+#            l1d_size = ["128kB"])
 
 
 
