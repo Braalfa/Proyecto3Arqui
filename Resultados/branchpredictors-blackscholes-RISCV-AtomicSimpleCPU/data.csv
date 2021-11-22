@@ -1,0 +1,4 @@
+,cacheline_size,l1d_size,cpu,isa,branchp,benchmark,BTBMissPct,BTBHitRatio,numCycles,branchMispredRatio
+0,64,32kB,AtomicSimpleCPU,RISCV,TournamentBP,blackscholes,0.001777,0.998223,10000015.0,0.031559
+1,64,32kB,AtomicSimpleCPU,RISCV,BiModeBP,blackscholes,0.002082,0.997918,10000015.0,0.046322
+2,64,32kB,AtomicSimpleCPU,RISCV,LocalBP,blackscholes,0.005475,0.994525,10000015.0,0.11551

@@ -1,0 +1,4 @@
+,cacheline_size,l1d_size,cpu,isa,branchp,benchmark,BTBMissPct,BTBHitRatio,numCycles,branchMispredRatio
+0,64,32kB,AtomicSimpleCPU,ARM,TournamentBP,458.sjeng,0.000398,0.999602,15175354.0,0.001623
+1,64,32kB,AtomicSimpleCPU,ARM,BiModeBP,458.sjeng,0.000248,0.999752,15175354.0,0.005039
+2,64,32kB,AtomicSimpleCPU,ARM,LocalBP,458.sjeng,0.000265,0.999735,15175354.0,0.003412
