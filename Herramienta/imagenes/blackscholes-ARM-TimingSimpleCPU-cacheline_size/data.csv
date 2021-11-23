@@ -1,0 +1,7 @@
+,cacheline_size,l1d_size,cpu,isa,branchp,benchmark,numCycles,dcache.overallMissRate,icache.overallMissRate,dcache.overallHits,icache.overallHits,dcache.overallMisses
+0,16,128kB,TimingSimpleCPU,ARM,None,blackscholes,6206957.0,0.002205,0.001102,330401.0,2511356.0,730.0
+1,32,128kB,TimingSimpleCPU,ARM,None,blackscholes,5984285.0,0.001462,0.000635,325093.0,2512531.0,476.0
+2,64,128kB,TimingSimpleCPU,ARM,None,blackscholes,5865409.0,0.000994,0.000381,324773.0,2513169.0,323.0
+3,128,128kB,TimingSimpleCPU,ARM,None,blackscholes,5805767.0,0.000722,0.000241,324004.0,2513522.0,234.0
+4,256,128kB,TimingSimpleCPU,ARM,None,blackscholes,5770671.0,0.000553,0.000157,323647.0,2513733.0,179.0
+5,512,128kB,TimingSimpleCPU,ARM,None,blackscholes,5754565.0,0.000454,0.000103,323674.0,2513869.0,147.0
